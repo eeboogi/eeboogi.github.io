@@ -8,10 +8,10 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Bogi's Homepage"
+title                    : "Boglarka Ecsedi"
 title_separator          : "-"
 name                     : &name "Boglarka Ecsedi"
-description              : &description "personal description"
+description              : &description "Computer Vision and Machine Learning Researcher"
 url                      : https://eeboogi.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "eeboogi/eeboogi.github.io"
@@ -21,10 +21,10 @@ repository               : "eeboogi/eeboogi.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.jpg"
+  avatar           : "profile-photo.jpg"
   name             : "Boglarka Ecsedi"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "PhD student at Georgia Tech working on reliable and efficient machine learning."
   location         : "Atlanta, GA"
   employer         : "Georgia Institute of Technology"
   uri              : # URL
@@ -244,7 +244,7 @@ defaults:
       type: pages
     values:
       layout: single
-      author_profile: true
+      author_profile: false
   # _teaching
   - scope:
       path: ""
