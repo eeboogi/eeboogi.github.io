@@ -13,7 +13,7 @@ redirect_from:
     <img src="/images/FF3D3EAB-65AE-495B-9F88-D96EFAD9FB7D_1_105_c.jpeg" alt="Portrait of Boglarka Ecsedi" class="hero-card__photo" width="1200" height="1200" loading="eager" decoding="async">
   </div>
   <div class="hero-card__text">
-    <p class="eyebrow">Boglarka Ecsedi</p>
+    <p class="eyebrow">Boglárka Ecsedi</p>
     <h1 class="hero-card__title">Computer Vision and Machine Learning Researcher</h1>
     <p class="hero-card__lead">
       I build reliable, practical machine learning systems and study the geometry of representation learning.
