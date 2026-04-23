@@ -703,7 +703,7 @@ body.stone-site .page__footer footer {
   max-width: calc(100vw - 2 * var(--float-side));
   margin-left: calc(50% - 50vw + var(--float-side));
   margin-right: calc(50% - 50vw + var(--float-side));
-  background: rgba(248, 246, 242, 0.9);
+  background: var(--paper);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: var(--radius-md);
