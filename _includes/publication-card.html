@@ -1,0 +1,66 @@
+{% include base_path %}
+{% assign p = include.post %}
+{% if p.id %}
+  {% assign p_title = p.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign p_title = p.title %}
+{% endif %}
+
+{% if p.header.teaser %}
+  {% capture p_teaser %}{{ p.header.teaser }}{% endcapture %}
+{% elsif p.image %}
+  {% capture p_teaser %}{{ p.image }}{% endcapture %}
+{% else %}
+  {% assign p_teaser = nil %}
+{% endif %}
+
+<article class="publication-card" itemscope itemtype="http://schema.org/CreativeWork">
+  <div class="publication-card__main">
+    <span class="publication-card__year">{{ p.date | default: "1900-01-01" | date: "%Y" }}</span>
+    <h3 class="publication-card__title" itemprop="headline">
+      <a href="{{ base_path }}{{ p.url }}" rel="permalink">{{ p_title }}</a>
+    </h3>
+
+    <p class="publication-card__meta">
+      <span>Published in <i>{{ p.venue }}</i>, {{ p.date | default: "1900-01-01" | date: "%Y" }}</span>
+      {% if p.category == 'conferences' and p.excerpt %}
+        <span class="publication-card__badge">{{ p.excerpt }}</span>
+      {% endif %}
+    </p>
+
+    {% if p.citation %}
+      <p class="publication-card__citation">{{ p.citation }}</p>
+    {% endif %}
+
+    <div class="publication-card__links">
+      <a href="{{ base_path }}{{ p.url }}" rel="permalink">Abstract</a>
+      {% if p.paperurl %}
+        <a href="{{ p.paperurl }}" target="_blank" rel="noopener">Paper</a>
+      {% endif %}
+      {% if p.codeurl %}
+        <a href="{{ p.codeurl }}" target="_blank" rel="noopener">Code</a>
+      {% endif %}
+      {% if p.projecturl %}
+        <a href="{{ p.projecturl }}" target="_blank" rel="noopener">Project</a>
+      {% endif %}
+      {% if p.bibtexurl %}
+        <a href="{{ p.bibtexurl }}" target="_blank" rel="noopener">BibTeX</a>
+      {% elsif p.bibtex %}
+        <details class="publication-card__bibtex">
+          <summary>BibTeX</summary>
+          <pre>{{ p.bibtex }}</pre>
+        </details>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="publication-card__media" aria-hidden="true">
+    {% if p_teaser %}
+      <img src="{% if p_teaser contains '://' %}{{ p_teaser }}{% else %}{{ p_teaser | prepend: '/images/' | prepend: base_path }}{% endif %}" alt="">
+    {% else %}
+      <div class="publication-card__placeholder">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+      </div>
+    {% endif %}
+  </div>
+</article>

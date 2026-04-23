@@ -347,6 +347,39 @@ a:hover {
   gap: 0.5rem 0.75rem;
 }
 
+.hero-card__links {
+  margin-top: 1.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 0.95rem;
+}
+
+.hero-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  padding: 0.56rem 0.98rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(198, 190, 178, 0.7);
+  background: rgba(250, 249, 247, 0.92);
+  color: var(--muted);
+  text-decoration: none !important;
+  font-weight: 500;
+  line-height: 1.1;
+  box-shadow: 0 2px 8px rgba(42, 44, 43, 0.05);
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.hero-pill-link i {
+  font-size: 1rem;
+}
+
+.hero-pill-link:hover {
+  color: var(--accent-hover);
+  border-color: rgba(116, 127, 121, 0.65);
+  background: rgba(255, 255, 255, 0.96);
+}
+
 // Flat, simple buttons (no pill shape)
 .hero-card .btn,
 .section-card a.btn {
@@ -717,44 +750,255 @@ body.stone-site .page__footer footer {
 
 /* Publications page: same floating card treatment as homepage sections */
 .publications-panels .wordwrap {
-  width: calc(100vw - 2 * var(--float-side));
-  max-width: calc(100vw - 2 * var(--float-side));
-  margin-left: calc(50% - 50vw + var(--float-side));
-  margin-right: calc(50% - 50vw + var(--float-side));
-  padding: 0.3rem var(--layout-pad) 0.8rem;
-  box-sizing: border-box;
+  color: var(--muted);
+}
+
+.publications-panels #main {
+  padding-left: var(--float-side) !important;
+  padding-right: var(--float-side) !important;
 }
 
 @media (min-width: 900px) {
-  .publications-panels .wordwrap {
-    padding-left: var(--layout-pad-lg);
-    padding-right: var(--layout-pad-lg);
+  .publications-panels #main {
+    padding-left: var(--float-side) !important;
+    padding-right: var(--float-side) !important;
   }
 }
 
-.publications-panels .page__content > .publication-section {
-  width: calc(100vw - 2 * var(--float-side));
-  max-width: calc(100vw - 2 * var(--float-side));
-  margin-left: calc(50% - 50vw + var(--float-side));
-  margin-right: calc(50% - 50vw + var(--float-side));
-  background: var(--paper);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius-md);
+.publications-panels .archive {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.publications-panels .archive > .page__title,
+.publications-panels .archive > .wordwrap {
+  width: auto !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background: var(--paper) !important;
+  border: 1px solid rgba(198, 190, 178, 0.35) !important;
+  box-shadow:
+    0 10px 34px rgba(42, 44, 43, 0.07),
+    0 0 0 1px rgba(198, 190, 178, 0.35) !important;
+  box-sizing: border-box;
+  padding-left: var(--layout-pad) !important;
+  padding-right: var(--layout-pad) !important;
+}
+
+.publications-panels .archive > .page__title {
+  margin-top: 0.8rem !important;
+  margin-bottom: 0 !important;
+  padding-top: 0.9rem !important;
+  padding-bottom: 0.35rem !important;
+  border-bottom: 0 !important;
+  border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+}
+
+.publications-panels .archive > .wordwrap {
+  margin-top: 0 !important;
+  margin-bottom: 0.9rem !important;
+  padding-top: 0.35rem !important;
+  padding-bottom: 0.9rem !important;
+  border-top: 0 !important;
+  border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+}
+
+@media (min-width: 900px) {
+  .publications-panels .archive > .page__title,
+  .publications-panels .archive > .wordwrap {
+    padding-left: var(--layout-pad-lg) !important;
+    padding-right: var(--layout-pad-lg) !important;
+  }
+}
+
+.publications-panels .archive > .publication-section {
+  width: auto !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background: var(--paper) !important;
+  border-radius: var(--radius-md) !important;
   box-shadow:
     0 12px 40px rgba(42, 44, 43, 0.08),
-    0 0 0 1px rgba(198, 190, 178, 0.48);
-  border: 1px solid rgba(198, 190, 178, 0.35);
-  padding-top: 1.5rem;
-  padding-bottom: 1.35rem;
+    0 0 0 1px rgba(198, 190, 178, 0.48) !important;
+  border: 1px solid rgba(198, 190, 178, 0.35) !important;
+  padding: 1.25rem var(--layout-pad) 1.35rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1.15rem !important;
 }
 
-.publications-panels .page__content > .publication-section + .publication-section {
-  margin-top: 1.1rem;
-}
-
-.publications-panels .publication-section > h2 {
+.publications-panels .archive > .publication-section > h2 {
   margin-top: 0;
+}
+
+@media (min-width: 900px) {
+  .publications-panels .archive > .publication-section {
+    padding-left: var(--layout-pad-lg) !important;
+    padding-right: var(--layout-pad-lg) !important;
+  }
+}
+
+.publication-card {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: 0.9rem 1.1rem;
+  align-items: start;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line-subtle);
+}
+
+.publication-section .publication-card:last-child {
+  border-bottom: 0;
+}
+
+.publication-card__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+}
+
+.publication-card__title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.publication-card__title a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.publication-card__meta {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.publication-card__badge {
+  display: inline-block;
+  margin-left: 0.45rem;
+  padding: 0.08rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(116, 127, 121, 0.4);
+  color: var(--accent-hover);
+  background: rgba(250, 249, 247, 0.85);
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.publication-card__citation {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.publication-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.58rem;
+}
+
+.publication-card__links > a,
+.publication-card__bibtex > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.28rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(116, 127, 121, 0.62);
+  background: rgba(250, 249, 247, 0.96);
+  color: var(--accent-hover);
+  text-decoration: none;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.2;
+  transition: background-color 0.14s ease, color 0.14s ease, border-color 0.14s ease;
+}
+
+.publication-card__links > a:hover,
+.publication-card__bibtex > summary:hover {
+  color: #fff;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.publication-card__bibtex {
+  margin: 0;
+}
+
+.publication-card__bibtex pre {
+  margin: 0.45rem 0 0;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.45rem;
+  background: rgba(245, 244, 241, 0.95);
+  border: 1px solid var(--line-subtle);
+  font-size: 0.76rem;
+  white-space: pre-wrap;
+}
+
+.publication-card__media {
+  width: 100%;
+  order: 1;
+}
+
+.publication-card__main {
+  order: 2;
+  position: relative;
+  padding-right: 4rem;
+}
+
+.publication-card__year {
+  position: absolute;
+  right: 0;
+  top: 0.05rem;
+  color: rgba(120, 122, 129, 0.34);
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.publication-card__media img,
+.publication-card__placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.5rem;
+  border: 1px solid var(--line-subtle);
+  background: rgba(242, 239, 233, 0.9);
+}
+
+.publication-card__media img {
+  object-fit: cover;
+  display: block;
+}
+
+.publication-card__placeholder {
+  display: grid;
+  place-items: center;
+  color: #9a948d;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 800px) {
+  .publication-card {
+    grid-template-columns: 1fr;
+  }
+
+  .publication-card__media {
+    max-width: 14rem;
+  }
+
+  .publication-card__main {
+    padding-right: 0;
+  }
+
+  .publication-card__year {
+    position: static;
+    display: inline-block;
+    margin-bottom: 0.35rem;
+    font-size: 1.35rem;
+  }
 }
 
 @media (max-width: 900px) {
@@ -770,6 +1014,10 @@ body.stone-site .page__footer footer {
   }
 
   .hero-card__cta {
+    justify-content: center;
+  }
+
+  .hero-card__links {
     justify-content: center;
   }
 

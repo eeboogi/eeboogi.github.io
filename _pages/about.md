@@ -19,9 +19,13 @@ redirect_from:
     <p class="hero-card__lead">
       My research asks how machine learning systems can remain reliable when deployment conditions are harder than training conditions, and how modular AI systems can be adapted and deployed safely in real-world, open-world environments. Longer term, I am interested in the intersection of modular AI architectures, safety mechanisms, and governance frameworks that support robust, accountable, and socially beneficial frontier AI development.
     </p>
-    <div class="hero-card__cta">
-      <a class="btn btn--primary" href="/publications/">View Publications</a>
-      <a class="btn btn--inverse" href="/cv/">Download CV</a>
+    <div class="hero-card__links" aria-label="Profile links">
+      <a class="hero-pill-link" href="mailto:bogi@cs.toronto.edu"><i class="fa fa-envelope" aria-hidden="true"></i><span>Email</span></a>
+      <a class="hero-pill-link" href="https://scholar.google.ca/citations?hl=en&user=eoMip2gAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener"><i class="ai ai-google-scholar" aria-hidden="true"></i><span>Scholar</span></a>
+      <a class="hero-pill-link" href="https://x.com/BogiEcsedi" target="_blank" rel="noopener"><i class="fab fa-x-twitter" aria-hidden="true"></i><span>X</span></a>
+      <a class="hero-pill-link" href="https://github.com/eeboogi?tab=overview&from=2026-04-01&to=2026-04-23" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i><span>GitHub</span></a>
+      <a class="hero-pill-link" href="https://www.linkedin.com/in/boglarka-ecsedi" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span></a>
+      <a class="hero-pill-link" href="https://www.instagram.com/eeboogi/?hl=en" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
     </div>
   </div>
 </section>
