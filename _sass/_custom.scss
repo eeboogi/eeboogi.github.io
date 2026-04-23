@@ -127,6 +127,24 @@ a:hover {
   color: var(--accent);
 }
 
+.masthead__brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.masthead__brand-logo {
+  display: block;
+  height: clamp(1.6rem, 2.8vw, 2.1rem);
+  width: auto;
+  transform: translateY(-4px);
+}
+
+/* Keep original left-right nav layout, just nudge content slightly higher */
+.masthead .greedy-nav .visible-links > li > a {
+  padding-top: 0.28rem;
+  padding-bottom: 0.28rem;
+}
+
 // Wide layout (minimal side margins), aligned with masthead - similar feel to malikeh97.github.io
 #main {
   position: relative;
@@ -487,6 +505,37 @@ a:hover {
   -webkit-backdrop-filter: blur(8px);
   font-size: 0.9rem;
   color: var(--muted);
+}
+
+.page__footer-layout {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.page__footer-brand {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.page__footer-brand-logo {
+  display: block;
+  height: clamp(2.2rem, 4.8vw, 3.25rem);
+  width: auto;
+}
+
+.page__footer-meta {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .page__footer-layout {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 // Inner pages (not homepage): solid reading surface over the same fixed stone
