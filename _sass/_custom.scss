@@ -279,6 +279,46 @@ a:hover {
   font-weight: 500;
 }
 
+.eyebrow__phonetic {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.92em;
+  margin-left: 0.35rem;
+  opacity: 0.9;
+}
+
+.hero-card__name {
+  margin: 0 0 0.45rem;
+  color: var(--ink);
+  line-height: 1.2;
+  font-size: clamp(1.9rem, 3.3vw, 2.4rem);
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.hero-card__name .eyebrow__phonetic {
+  display: inline-block;
+  font-size: 0.56em;
+  font-weight: 500;
+  margin-left: 0.42rem;
+  color: var(--muted);
+}
+
+.hero-card__role {
+  margin: 0 0 0.8rem;
+  color: var(--muted);
+  font-size: clamp(0.98rem, 1.8vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.hero-card__nickname {
+  margin: 0 0 0.55rem;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.6vw, 1.02rem);
+  font-style: italic;
+}
+
 .hero-card__title {
   margin: 0 0 0.7rem;
   color: var(--ink);
@@ -291,15 +331,9 @@ a:hover {
 .hero-card__lead {
   color: var(--muted);
   font-size: 1.04rem;
-  max-width: 48ch;
+  max-width: none;
   font-weight: 400;
   line-height: 1.65;
-}
-
-@media (min-width: 1100px) {
-  .hero-card__lead {
-    max-width: 54ch;
-  }
 }
 
 .hero-card__text {
@@ -745,6 +779,16 @@ body.stone-site .page__footer footer {
 
   .hero-card__title {
     font-size: 1.55rem;
+  }
+
+  .hero-card__name {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+  }
+
+  .hero-card__name .eyebrow__phonetic {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.2rem;
   }
 
   .theme-grid {
