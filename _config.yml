@@ -21,7 +21,7 @@ repository               : "eeboogi/eeboogi.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile-photo.jpg"
+  avatar           : "FF3D3EAB-65AE-495B-9F88-D96EFAD9FB7D_1_105_c.jpeg"
   name             : "Boglarka Ecsedi"
   pronouns         : # example: "she/her"  
   bio              : "PhD student at Georgia Tech working on reliable and efficient machine learning."

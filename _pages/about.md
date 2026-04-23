@@ -1,6 +1,7 @@
 ---
 permalink: /
 title: "Boglarka Ecsedi"
+hide_page_header: true
 author_profile: false
 redirect_from:
   - /about/
@@ -8,6 +9,9 @@ redirect_from:
 ---
 
 <section class="hero-card">
+  <div class="hero-card__photo-wrap">
+    <img src="/images/FF3D3EAB-65AE-495B-9F88-D96EFAD9FB7D_1_105_c.jpeg" alt="Portrait of Boglarka Ecsedi" class="hero-card__photo" width="1200" height="1200" loading="eager" decoding="async">
+  </div>
   <div class="hero-card__text">
     <p class="eyebrow">Boglarka Ecsedi</p>
     <h1 class="hero-card__title">Computer Vision and Machine Learning Researcher</h1>
@@ -19,9 +23,6 @@ redirect_from:
       <a class="btn btn--primary" href="/publications/">View Publications</a>
       <a class="btn btn--inverse" href="/cv/">Download CV</a>
     </div>
-  </div>
-  <div class="hero-card__photo-wrap">
-    <img src="/images/profile-photo.jpg" alt="Portrait of Boglarka Ecsedi" class="hero-card__photo" width="1800" height="1200" loading="eager" decoding="async">
   </div>
 </section>
 
