@@ -496,7 +496,7 @@ body.stone-site:not(.stone-site--home) #main article.page .page__inner-wrap {
   box-shadow: 0 6px 36px rgba(42, 44, 43, 0.07);
 }
 
-// Site-wide horizontal gutter (used with layout padding for masthead, #main, footer)
+// Site-wide horizontal gutter: matches floating home sections (stone visible L/R of panels)
 body.stone-site {
   --float-side: clamp(1.05rem, 4.5vw, 2.75rem);
 }
@@ -507,10 +507,27 @@ body.stone-site {
   }
 }
 
-// Masthead, main column, and footer: same side inset on every page
+// Masthead and footer *bands* inset by --float-side (same visible gap as home floating cards);
+// inner padding is only --layout-pad so text lines up with card content.
+body.stone-site .masthead {
+  left: var(--float-side);
+  right: var(--float-side);
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+body.stone-site .page__footer {
+  width: calc(100% - 2 * var(--float-side));
+  max-width: 100%;
+  margin-left: var(--float-side);
+  margin-right: var(--float-side);
+  box-sizing: border-box;
+}
+
 body.stone-site .masthead .masthead__inner-wrap {
-  padding-left: calc(var(--float-side) + var(--layout-pad)) !important;
-  padding-right: calc(var(--float-side) + var(--layout-pad)) !important;
+  padding-left: var(--layout-pad) !important;
+  padding-right: var(--layout-pad) !important;
 }
 
 body.stone-site #main {
@@ -519,14 +536,14 @@ body.stone-site #main {
 }
 
 body.stone-site .page__footer footer {
-  padding-left: calc(var(--float-side) + var(--layout-pad)) !important;
-  padding-right: calc(var(--float-side) + var(--layout-pad)) !important;
+  padding-left: var(--layout-pad) !important;
+  padding-right: var(--layout-pad) !important;
 }
 
 @media (min-width: 900px) {
   body.stone-site .masthead .masthead__inner-wrap {
-    padding-left: calc(var(--float-side) + var(--layout-pad-lg)) !important;
-    padding-right: calc(var(--float-side) + var(--layout-pad-lg)) !important;
+    padding-left: var(--layout-pad-lg) !important;
+    padding-right: var(--layout-pad-lg) !important;
   }
 
   body.stone-site #main {
@@ -535,8 +552,8 @@ body.stone-site .page__footer footer {
   }
 
   body.stone-site .page__footer footer {
-    padding-left: calc(var(--float-side) + var(--layout-pad-lg)) !important;
-    padding-right: calc(var(--float-side) + var(--layout-pad-lg)) !important;
+    padding-left: var(--layout-pad-lg) !important;
+    padding-right: var(--layout-pad-lg) !important;
   }
 }
 
