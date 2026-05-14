@@ -1,4 +1,3 @@
-{% include base_path %}
 {% assign p = include.post %}
 {% if p.id %}
   {% assign p_title = p.title | markdownify | remove: "<p>" | remove: "</p>" %}
@@ -14,53 +13,164 @@
   {% assign p_teaser = nil %}
 {% endif %}
 
+{% if p.poster_image %}
+  {% if p.poster_image contains '://' %}
+    {% assign poster_zoom_src = p.poster_image %}
+  {% else %}
+    {% capture poster_zoom_src %}/images/{{ p.poster_image }}{% endcapture %}
+    {% assign poster_zoom_src = poster_zoom_src | relative_url %}
+  {% endif %}
+{% endif %}
+
+{% assign card_id = p.path | split: '/' | last | replace: '.md', '' | replace: '.markdown', '' %}
+{% assign title_l = p.title | downcase %}
+{% assign slug_last = p.permalink | default: p.url | split: "/" | last %}
+{% assign show_code_btn = false %}
+{% if p.codeurl and p.codeurl != "" %}
+  {% assign show_code_btn = true %}
+{% elsif title_l contains "debi-nn" %}
+  {% assign show_code_btn = true %}
+{% elsif slug_last contains "tie-knots" %}
+  {% assign show_code_btn = true %}
+{% endif %}
+{% assign show_handbook_btn = false %}
+{% assign debi_nn_handbook_url = "https://doi.org/10.5281/zenodo.15828851" %}
+{% if title_l contains "debi-nn" %}
+  {% assign show_handbook_btn = true %}
+{% elsif title_l contains "distance-encoding biomorphic" %}
+  {% assign show_handbook_btn = true %}
+{% elsif slug_last contains "debi-nn" %}
+  {% assign show_handbook_btn = true %}
+{% endif %}
+{% assign teaser_lc = p_teaser | downcase %}
+{% assign teaser_src = '' %}
+{% if p_teaser %}
+  {% if p_teaser contains '://' %}
+    {% assign teaser_src = p_teaser %}
+  {% else %}
+    {% capture teaser_src %}/images/{{ p_teaser }}{% endcapture %}
+    {% assign teaser_src = teaser_src | relative_url %}
+  {% endif %}
+{% endif %}
+
 <article class="publication-card" itemscope itemtype="http://schema.org/CreativeWork">
   <div class="publication-card__main">
     <span class="publication-card__year">{{ p.date | default: "1900-01-01" | date: "%Y" }}</span>
     <h3 class="publication-card__title" itemprop="headline">
-      <a href="{{ base_path }}{{ p.url }}" rel="permalink">{{ p_title }}</a>
+      <span class="publication-card__title-text">{{ p_title }}</span>
     </h3>
 
     <p class="publication-card__meta">
-      <span>Published in <i>{{ p.venue }}</i>, {{ p.date | default: "1900-01-01" | date: "%Y" }}</span>
-      {% if p.category == 'conferences' and p.excerpt %}
-        <span class="publication-card__badge">{{ p.excerpt }}</span>
+      <span class="publication-card__venue"><i>{{ p.venue }}</i></span>
+      {% if p.excerpt %}
+        {% if p.category == 'conferences' or p.category == 'summer_school' %}
+          <span class="publication-card__badge">{{ p.excerpt }}</span>
+        {% endif %}
       {% endif %}
     </p>
 
-    {% if p.citation %}
-      <p class="publication-card__citation">{{ p.citation }}</p>
+    {% if p.authors %}
+      <p class="publication-card__citation">{% include citation-highlight.html citation=p.authors %}</p>
+    {% elsif p.citation %}
+      <p class="publication-card__citation">{% include citation-highlight.html citation=p.citation %}</p>
     {% endif %}
 
     <div class="publication-card__links">
-      <a href="{{ base_path }}{{ p.url }}" rel="permalink">Abstract</a>
-      {% if p.paperurl %}
-        <a href="{{ p.paperurl }}" target="_blank" rel="noopener">Paper</a>
+      <button type="button" class="publication-card__pill publication-card__abstract-toggle" aria-expanded="false" aria-controls="abstract-{{ card_id }}">Abstract</button>
+
+      {% if p.paperurl and p.paperurl != "" %}
+        <a class="publication-card__pill" href="{{ p.paperurl }}" target="_blank" rel="noopener">Paper</a>
+      {% else %}
+        <a class="publication-card__pill" href="#" data-pending="true">Paper</a>
       {% endif %}
-      {% if p.codeurl %}
-        <a href="{{ p.codeurl }}" target="_blank" rel="noopener">Code</a>
+
+      {% if show_code_btn %}
+        {% if p.codeurl and p.codeurl != "" %}
+          <a class="publication-card__pill" href="{{ p.codeurl }}" target="_blank" rel="noopener">Code</a>
+        {% else %}
+          <a class="publication-card__pill" href="#" data-pending="true">Code</a>
+        {% endif %}
       {% endif %}
-      {% if p.projecturl %}
-        <a href="{{ p.projecturl }}" target="_blank" rel="noopener">Project</a>
+
+      {% if show_handbook_btn %}
+        {% if p.handbookurl and p.handbookurl != "" %}
+          {% assign handbook_link = p.handbookurl %}
+        {% else %}
+          {% assign handbook_link = debi_nn_handbook_url %}
+        {% endif %}
+        <a class="publication-card__pill" href="{{ handbook_link }}" target="_blank" rel="noopener">Handbook</a>
       {% endif %}
-      {% if p.bibtexurl %}
-        <a href="{{ p.bibtexurl }}" target="_blank" rel="noopener">BibTeX</a>
+
+      {% if p.poster_image and p.poster_image != "" %}
+        <button type="button" class="publication-card__pill" aria-haspopup="dialog" aria-controls="poster-lightbox-{{ card_id }}" data-poster-open="{{ card_id }}">Poster</button>
+      {% endif %}
+
+      {% if p.pressurl and p.pressurl != "" %}
+        <a class="publication-card__pill" href="{{ p.pressurl }}" target="_blank" rel="noopener">Press</a>
+      {% endif %}
+
+      {% if p.videourl and p.videourl != "" %}
+        <a class="publication-card__pill" href="{{ p.videourl }}" target="_blank" rel="noopener">Video</a>
+      {% endif %}
+
+      {% if p.bibtexurl and p.bibtexurl != "" %}
+        <a class="publication-card__pill" href="{{ p.bibtexurl }}" target="_blank" rel="noopener">BibTeX</a>
       {% elsif p.bibtex %}
-        <details class="publication-card__bibtex">
-          <summary>BibTeX</summary>
-          <pre>{{ p.bibtex }}</pre>
-        </details>
+        <button type="button" class="publication-card__pill publication-card__bibtex-toggle" aria-expanded="false" aria-controls="bibtex-{{ card_id }}">BibTeX</button>
+      {% else %}
+        <a class="publication-card__pill" href="#" data-pending="true">BibTeX</a>
       {% endif %}
     </div>
+
+    <div id="abstract-{{ card_id }}" class="publication-card__abstract-panel" hidden>
+      {% if p.abstract %}
+        <div class="publication-card__abstract-body">{{ p.abstract | markdownify }}</div>
+      {% else %}
+        <p class="publication-card__panel-placeholder">Abstract coming soon.</p>
+      {% endif %}
+    </div>
+
+    {% if p.bibtex %}
+      <div id="bibtex-{{ card_id }}" class="publication-card__bibtex-panel" hidden>
+        <div class="publication-card__bibtex-wrap">
+          <button type="button" class="publication-card__copy-bibtex" aria-label="Copy BibTeX to clipboard" data-copy-bibtex="#bibtex-pre-{{ card_id }}">Copy</button>
+          <pre id="bibtex-pre-{{ card_id }}" class="publication-card__bibtex-pre">{{ p.bibtex | replace: '&', '&amp;' | replace: '<', '&lt;' | replace: '>', '&gt;' }}</pre>
+        </div>
+      </div>
+    {% endif %}
   </div>
 
   <div class="publication-card__media" aria-hidden="true">
     {% if p_teaser %}
-      <img src="{% if p_teaser contains '://' %}{{ p_teaser }}{% else %}{{ p_teaser | prepend: '/images/' | prepend: base_path }}{% endif %}" alt="">
+      <img
+        class="{% if teaser_lc contains '.gif' %}publication-card__thumb--gif{% elsif p.thumb_contain %}publication-card__thumb--contain{% endif %}"
+        src="{{ teaser_src }}"
+        alt=""
+        {% if teaser_lc contains '.gif' %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+        decoding="async">
     {% else %}
       <div class="publication-card__placeholder">
         <i class="fa fa-file-text-o" aria-hidden="true"></i>
       </div>
     {% endif %}
   </div>
+
+  {% if p.poster_image and p.poster_image != "" %}
+    <div id="poster-lightbox-{{ card_id }}" class="publication-card__lightbox" role="dialog" aria-modal="true" aria-label="Poster viewer" hidden data-poster-lightbox="{{ card_id }}">
+      <button type="button" class="publication-card__lightbox-backdrop" tabindex="-1" aria-label="Close poster" data-poster-close="{{ card_id }}"></button>
+      <div class="publication-card__lightbox-dialog">
+        <div class="publication-card__lightbox-chrome">
+          <button type="button" class="publication-card__lightbox-close" aria-label="Close" data-poster-close="{{ card_id }}">×</button>
+          <div class="publication-card__lightbox-toolbar" role="group" aria-label="Zoom controls">
+            <button type="button" class="publication-card__lightbox-zoom" data-poster-zoom="{{ card_id }}" data-zoom-dir="-1" aria-label="Zoom out">−</button>
+            <button type="button" class="publication-card__lightbox-zoom" data-poster-zoom="{{ card_id }}" data-zoom-dir="0" aria-label="Reset zoom">100%</button>
+            <button type="button" class="publication-card__lightbox-zoom" data-poster-zoom="{{ card_id }}" data-zoom-dir="1" aria-label="Zoom in">+</button>
+          </div>
+        </div>
+        <div class="publication-card__lightbox-viewport" data-poster-viewport="{{ card_id }}">
+          <img src="{{ poster_zoom_src }}" alt="Poster" class="publication-card__lightbox-img" data-poster-img="{{ card_id }}" decoding="async">
+        </div>
+      </div>
+    </div>
+  {% endif %}
 </article>

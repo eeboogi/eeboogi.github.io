@@ -1,0 +1,6 @@
+{% assign _d = include.doc %}
+{% if _d.authors and _d.authors != "" %}
+  {% include citation-highlight.html citation=_d.authors %}
+{% elsif _d.citation %}
+  {% include citation-highlight.html citation=_d.citation %}
+{% endif %}

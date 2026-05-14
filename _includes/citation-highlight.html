@@ -1,0 +1,6 @@
+{% assign _cite = include.citation
+  | replace: 'Boglarka Ecsedi', '<strong>Boglarka Ecsedi</strong>'
+  | replace: 'Bogi Ecsedi', '<strong>Bogi Ecsedi</strong>'
+  | replace: 'B. Ecsedi', '<strong>B. Ecsedi</strong>'
+-%}
+{{- _cite -}}
